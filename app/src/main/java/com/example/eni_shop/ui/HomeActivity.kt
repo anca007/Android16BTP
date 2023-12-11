@@ -1,12 +1,10 @@
-package com.example.eni_shop
+package com.example.eni_shop.ui
 
 import android.content.Intent
-import android.net.Uri
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.annotation.RequiresApi
-import com.example.eni_shop.bo.Article
+import com.example.eni_shop.R
+import com.example.eni_shop.ui.articleadd.AjoutArticleActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 

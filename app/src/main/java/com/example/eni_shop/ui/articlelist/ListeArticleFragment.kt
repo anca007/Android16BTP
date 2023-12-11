@@ -1,4 +1,4 @@
-package com.example.eni_shop
+package com.example.eni_shop.ui.articlelist
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -36,7 +36,10 @@ class ListeArticleFragment : Fragment() {
         binding.btnToDetail.setOnClickListener {
             var article = articles?.random()
             if(article != null){
-                val direction = ListeArticleFragmentDirections.actionListToDetailArticle(article)
+                val direction =
+                    ListeArticleFragmentDirections.actionListToDetailArticle(
+                        article
+                    )
                 Navigation.findNavController(view).navigate(direction)
             }
 
