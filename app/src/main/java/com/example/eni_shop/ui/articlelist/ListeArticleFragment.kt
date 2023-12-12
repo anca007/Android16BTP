@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.example.eni_shop.databinding.FragmentListeArticleBinding
-import com.example.eni_shop.repository.ArticleRepository
 
 class ListeArticleFragment : Fragment() {
 

@@ -6,6 +6,9 @@
     <data>
         <import type="com.example.eni_shop.utils.DateConverter"/>
         <variable
+            name="vm"
+            type="com.example.eni_shop.ui.articleview.DetailArticleViewModel" />
+        <variable
             name="article"
             type="com.example.eni_shop.bo.Article" />
     </data>
@@ -69,6 +72,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_article_title" />
+
+        <CheckBox
+            android:id="@+id/checkBoxFav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Favori ?"
+            android:checked="@={vm.fav}"
+            app:layout_constraintBottom_toTopOf="@+id/tv_article_price"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_article_description" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
