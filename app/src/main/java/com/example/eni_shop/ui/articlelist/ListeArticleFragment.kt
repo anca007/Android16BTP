@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.example.eni_shop.databinding.FragmentListeArticleBinding
 import com.example.eni_shop.repository.ArticleRepository
@@ -12,6 +13,7 @@ import com.example.eni_shop.repository.ArticleRepository
 class ListeArticleFragment : Fragment() {
 
     lateinit var binding: FragmentListeArticleBinding
+    lateinit var vm : ListArticleViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -24,17 +26,21 @@ class ListeArticleFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val articles = ArticleRepository().getAllArticles()
-        var titles = ""
+        vm = ViewModelProvider(this)[ListArticleViewModel::class.java]
 
-        articles?.forEach {
-            titles += it.titre + "\n"
-        }.also {
-            binding.tvArticles.text = titles
+        //viewLifecycleOwner à utiliser dans les fragments
+        vm.getArticleList().observe(viewLifecycleOwner){
+            var titles = ""
+
+            it.forEach {
+                titles += it.titre + "\n"
+            }.also {
+                binding.tvArticles.text = titles
+            }
         }
 
         binding.btnToDetail.setOnClickListener {
-            var article = articles?.random()
+            var article = vm.getRandomArticle()
             if(article != null){
                 val direction =
                     ListeArticleFragmentDirections.actionListToDetailArticle(
