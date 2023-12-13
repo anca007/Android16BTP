@@ -8,6 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView.LayoutManager
+import com.example.eni_shop.adapter.ArticleAdapter
 import com.example.eni_shop.bo.Article
 import com.example.eni_shop.databinding.FragmentListeArticleBinding
 
@@ -29,36 +32,25 @@ class ListeArticleFragment : Fragment() {
 
         binding.buttonFav.setOnClickListener {
             vm.getArticleListFav().observe(viewLifecycleOwner) {
-                displayArticles(it)
+                displayArticles(it, view)
             }
         }
 
         //viewLifecycleOwner à utiliser dans les fragments
         vm.getArticleList().observe(viewLifecycleOwner) {
-            displayArticles(it)
-        }
-
-        binding.btnToDetail.setOnClickListener {
-            var article = vm.getRandomArticle()
-            if (article != null) {
-                val direction =
-                    ListeArticleFragmentDirections.actionListToDetailArticle(
-                        article
-                    )
-                Navigation.findNavController(view).navigate(direction)
-            }
-
+            displayArticles(it, view)
         }
 
     }
 
-    private fun displayArticles(articles: List<Article>) {
-        var titles = ""
-        articles.forEach {
-            titles += it.titre + "\n"
-        }.also {
-            binding.tvArticles.text = titles
+    private fun displayArticles(articles: List<Article>, view: View) {
+
+        binding.articleRecycler.adapter = ArticleAdapter(articles) {
+            val direction =
+                ListeArticleFragmentDirections.actionListToDetailArticle(it)
+            Navigation.findNavController(view).navigate(direction)
         }
+        binding.articleRecycler.layoutManager = LinearLayoutManager(view.context)
 
     }
 
