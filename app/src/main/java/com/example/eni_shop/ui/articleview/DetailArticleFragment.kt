@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.example.eni_shop.databinding.FragmentDetailArticleBinding
+import com.squareup.picasso.Picasso
 
 
 private const val TAG = "DetailArticleViewModel"
@@ -34,10 +35,9 @@ class DetailArticleFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val article = args.article
-
+        //popule l'imageView avec l'url de l'image
+        Picasso.get().load(article.urlImage).into(binding.imageView);
         vm.checkArticle(article.id)
-
-        Log.i(TAG, "après le checkArticle: ")
 
         binding.article = article
         binding.vm = vm
